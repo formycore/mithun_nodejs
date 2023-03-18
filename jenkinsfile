@@ -1,0 +1,19 @@
+// https://askubuntu.com/questions/720784/how-to-install-latest-node-inside-a-docker-container
+node {
+    stage('Checkout'){
+        git 'https://github.com/formycore/mithun_nodejs.git'
+    }
+    //stage ('Build'){
+    //    sh "npm install"
+    //}
+    stage('Node Build'){
+        nodejs(nodeJSInstallationName: 'nodejs18'){
+            sh "npm install"
+        }
+    stage ("SonarReport"){
+        nodejs(nodeJSInstallationName: 'nodejs18'){
+            sh "npm run sonar"
+        }
+    }
+    }
+}
